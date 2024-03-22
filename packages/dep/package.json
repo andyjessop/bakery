@@ -1,0 +1,7 @@
+{
+	"name": "dep",
+	"type": "module",
+	"scripts": {
+		"serve": "bun run ./src/index.ts"
+	}
+}
