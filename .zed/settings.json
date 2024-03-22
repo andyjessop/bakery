@@ -1,0 +1,14 @@
+{
+  "formatter": {
+    "external": {
+      "command": "bunx",
+      "arguments": [
+        "@biomejs/biome",
+        "format",
+        "--stdin-file-path",
+        "{buffer_path}",
+        "--write"
+      ]
+    }
+  }
+}

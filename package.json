@@ -1,0 +1,11 @@
+{
+	"name": "bun-playground",
+	"license": "ISC",
+	"type": "module",
+	"scripts": {
+		"serve": "bun run src/index.ts"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.6.2"
+	}
+}
