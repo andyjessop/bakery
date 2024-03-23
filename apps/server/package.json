@@ -3,8 +3,5 @@
 	"type": "module",
 	"scripts": {
 		"serve": "bun run ./src/index.ts"
-	},
-	"dependencies": {
-		"dep": "workspace:*"
 	}
 }

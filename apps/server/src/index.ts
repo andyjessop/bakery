@@ -1,3 +1,3 @@
-import "dep";
+import { pkgA } from "pkg-a";
 
-console.log("works");
+pkgA();

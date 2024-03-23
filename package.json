@@ -6,7 +6,8 @@
 		"serve": "bun run --cwd ./apps/server serve"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.6.2"
+		"@biomejs/biome": "1.6.2",
+		"@types/bun": "^1.0.10"
 	},
 	"workspaces": ["apps/*", "packages/*"]
 }

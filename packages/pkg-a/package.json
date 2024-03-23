@@ -1,6 +1,7 @@
 {
-	"name": "dep",
+	"name": "pkg-a",
 	"type": "module",
+	"main": "src/index.ts",
 	"scripts": {
 		"serve": "bun run ./src/index.ts"
 	}
