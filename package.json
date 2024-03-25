@@ -3,7 +3,10 @@
 	"license": "ISC",
 	"type": "module",
 	"scripts": {
-		"serve": "bun run --cwd ./apps/server serve"
+		"serve": "bun run --cwd ./apps/server serve",
+		"graph": "bun run ./scripts/dep-graph.ts",
+		"runner": "bun run ./scripts/runner.ts",
+		"affected": "bun run ./scripts/affected.ts"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.6.2",

@@ -1,3 +1,1 @@
-import { pkgA } from "pkg-a";
-
-pkgA();
+console.log("serving");

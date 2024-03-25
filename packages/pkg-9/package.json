@@ -1,8 +1,8 @@
 {
-	"name": "pkg-a",
+	"name": "pkg-9",
 	"type": "module",
 	"main": "src/index.ts",
 	"scripts": {
-		"serve": "bun run ./src/index.ts"
+		"test": "bun run src/test.ts"
 	}
 }
