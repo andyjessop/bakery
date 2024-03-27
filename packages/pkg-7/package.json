@@ -1,0 +1,8 @@
+{
+	"name": "pkg-7",
+	"type": "module",
+	"main": "src/index.ts",
+	"scripts": {
+		"test": "bun run src/test.ts"
+	}
+}
