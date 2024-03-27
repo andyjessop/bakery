@@ -9,3 +9,8 @@ export interface FileInfo {
 	filename: string;
 	content: string;
 }
+
+export interface Task {
+	packageInfo: PackageInfo;
+	scriptName: string;
+}

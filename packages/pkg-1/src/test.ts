@@ -1,1 +1,1 @@
-console.log("testing pkg-2");
+console.log("testing pkg-1");
