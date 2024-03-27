@@ -11,6 +11,7 @@ export interface FileInfo {
 }
 
 export interface Task {
+	flags: Record<string, string>;
 	packageInfo: PackageInfo;
 	scriptName: string;
 }

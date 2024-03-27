@@ -10,3 +10,10 @@ export interface Context<S extends Record<string, any>> {
 export type Middleware<S extends Record<string, any>> = (
 	ctx: Context<S>,
 ) => Promise<void> | void;
+
+export type TaskOutput = {
+	script: string;
+	package: string;
+	output: string;
+	command: string;
+};

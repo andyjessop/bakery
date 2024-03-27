@@ -1,19 +1,27 @@
 import type { TaskConfig } from "../../../types/types";
 import type { PackageInfo, Task } from "../../graph/types";
+import { readPackageJson } from "../../utils/read-package-json";
 
-export function createTaskPipeline(
+export async function createTaskPipeline(
 	scriptName: string,
 	affectedPackages: PackageInfo[],
 	taskConfig: TaskConfig,
-): Task[][] {
+	flags: Record<string, string>,
+): Promise<Task[][]> {
 	const taskLevels: Task[][] = [];
 	const visitedPackages = new Set<string>();
 
-	function addTasksForPackage(packageInfo: PackageInfo, level: number) {
+	async function addTasksForPackage(packageInfo: PackageInfo, level: number) {
 		if (visitedPackages.has(packageInfo.name)) {
 			return;
 		}
 		visitedPackages.add(packageInfo.name);
+
+		const packageJson = await readPackageJson(packageInfo.path);
+
+		if (!packageJson.scripts || !packageJson.scripts[scriptName]) {
+			return;
+		}
 
 		const dependencies = taskConfig.tasks[scriptName]?.dependsOn || [];
 		for (const dependency of dependencies) {
@@ -21,18 +29,18 @@ export function createTaskPipeline(
 				(pkg) => pkg.name === dependency,
 			);
 			if (dependencyPackage) {
-				addTasksForPackage(dependencyPackage, level + 1);
+				await addTasksForPackage(dependencyPackage, level + 1);
 			}
 		}
 
 		if (!taskLevels[level]) {
 			taskLevels[level] = [];
 		}
-		taskLevels[level].push({ packageInfo, scriptName });
+		taskLevels[level].push({ flags, packageInfo, scriptName });
 	}
 
 	for (const packageInfo of affectedPackages) {
-		addTasksForPackage(packageInfo, taskLevels.length);
+		await addTasksForPackage(packageInfo, taskLevels.length);
 	}
 
 	return taskLevels;
