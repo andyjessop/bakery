@@ -43,13 +43,18 @@ async function runTask(task: Task): Promise<TaskOutput> {
 	);
 
 	const command = `bun run --cwd ${path} ${scriptName} ${flagsString}`;
-	const output =
+	const { stdout, stderr, exitCode } =
 		await $`bun run --cwd ${path} ${scriptName} ${flagsString}`.quiet();
+
+	if (exitCode !== 0) {
+		console.error(stderr.toString());
+		process.exit(exitCode);
+	}
 
 	return {
 		command,
 		package: name,
-		output: output.stdout.toString(),
+		output: stdout.toString(),
 		script: scriptName,
 	};
 }
