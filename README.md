@@ -9,7 +9,7 @@ Bakery is a monorepo task runner that allows you to efficiently run scripts acro
 ## Installation
 
 ```bash
-bun install @andyjessop/bakery
+bun install @andyjessop/bakery --save-dev
 ```
 
 Alternateively, clone this repo as a starter template: https://github.com/andyjessop/bakery-template
