@@ -1,17 +1,16 @@
 {
 	"name": "@andyjessop/bakery",
-  "version": "0.0.1",
-  "author": "Andy Jessop",
+	"version": "0.0.1",
+	"author": "Andy Jessop",
 	"license": "CC BY-NC 4.0",
 	"type": "module",
-  "bin": {
-    "bakery": "./bin/bakery"
-  },
-  "files": [
-    "bin/bakery"
-  ],
+	"bin": {
+		"bakery": "./.bin/bakery"
+	},
+	"files": [".bin/bakery"],
 	"scripts": {
-    "build": "bun build ./scripts/command/command.ts --compile --outfile bin/bakery",
+		"build": "bun build ./scripts/command/command.ts --compile --outfile .bin/bakery",
+		"publish": "npm publish --access=public",
 		"serve": "bun run --cwd ./apps/server serve",
 		"command": "bun run ./scripts/command/command.ts"
 	},
