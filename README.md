@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/bakery2.png" />
+  <img src="./assets/bakery.png" width=400/>
 </p>
 
 # Bakery
