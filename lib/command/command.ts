@@ -4,10 +4,10 @@ import { taskConfig } from "../middleware/task-config/task-config";
 import { taskRunner } from "../middleware/task-runner/task-runner";
 import { gitDetails } from "../middleware/git-details/git-details";
 import { filterPackagesByName } from "../middleware/filter-packages-by-name/filter-packages-by-name";
-import { packages } from "../middleware/packages/packages";
-import { filterPackagesByAffected } from "../middleware/filter-packages-by-affected/filter-packages-by-affected";
+import { packageDetails } from "../middleware/package-details/package-details";
 import { flags } from "../middleware/flags/flags";
 import { taskPipeline } from "../middleware/task-pipeline/task-pipeline";
+import { packageInfo } from "../middleware/package-info/package-info";
 
 try {
 	await main();
@@ -25,16 +25,13 @@ async function main() {
 	runner.use(taskConfig);
 	runner.use(gitDetails);
 
-	// First get all packages...
-	runner.use(packages);
-
-	// ...then filter out non-affected packages
-	if (command === "affected") {
-		runner.use(filterPackagesByAffected);
-	}
+	// First get all package details...
+	runner.use(packageDetails);
 
 	// ...then filter by packages named in --packages flag
 	runner.use(filterPackagesByName);
+
+	runner.use(packageInfo);
 
 	runner.use(taskPipeline);
 	runner.use(taskRunner);

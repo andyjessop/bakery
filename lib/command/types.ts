@@ -1,10 +1,18 @@
-import type { GitDetails, PackageInfo, Task, TaskConfig } from "../types";
+import type {
+	GitDetails,
+	PackageDetails,
+	PackageInfo,
+	Task,
+	TaskConfig,
+} from "../types";
 import type { Context, TaskOutput } from "../runner/types";
 
 export type State = {
 	flags: Record<string, string>;
 	gitDetails: GitDetails;
-	packages: PackageInfo[];
+	allPackagesDetails: PackageDetails[];
+	filteredPackagesDetails: PackageDetails[];
+	filteredPackagesInfo: PackageInfo[];
 	taskConfig: TaskConfig;
 	taskOutputs: TaskOutput[];
 	taskPipeline: Task[][];

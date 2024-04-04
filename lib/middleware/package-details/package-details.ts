@@ -1,15 +1,14 @@
 import type { CommandContext } from "../../command/types";
 import type { PackageInfo } from "../../types";
-import { getPackages } from "./get-packages";
+import { getPackageDetails } from "./get-package-details";
 import { readdir } from "node:fs/promises";
 
-export async function packages(ctx: CommandContext) {
+export async function packageDetails(ctx: CommandContext) {
 	const { set } = ctx;
 
-	const packages = await getPackages(process.cwd());
-	await populateFileDetails(packages);
+	const packages = await getPackageDetails(process.cwd());
 
-	set("packages", packages);
+	set("allPackagesDetails", packages);
 }
 
 async function populateFileDetails(packages: PackageInfo[]) {

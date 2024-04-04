@@ -9,7 +9,7 @@ export async function taskPipeline(ctx: CommandContext) {
 
 	const pipeline = createTaskPipeline(
 		script,
-		get("packages"),
+		get("filteredPackagesInfo"),
 		get("taskConfig"),
 		flags,
 	);

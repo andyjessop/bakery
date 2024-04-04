@@ -1,9 +1,11 @@
 import { $, Glob } from "bun";
 import path from "node:path";
-import type { PackageInfo } from "../../types";
+import type { PackageDetails } from "../../types";
 
-export async function getPackages(rootDir: string): Promise<PackageInfo[]> {
-	const packages: PackageInfo[] = [];
+export async function getPackageDetails(
+	rootDir: string,
+): Promise<PackageDetails[]> {
+	const packages: PackageDetails[] = [];
 
 	// Get root package details
 	const { stdout: rootPackageJson } = await $`cat ${path.join(
@@ -27,34 +29,11 @@ export async function getPackages(rootDir: string): Promise<PackageInfo[]> {
 			const packageInfo = JSON.parse(packageJsonContent.toString());
 
 			packages.push({
-				deps: [],
 				details: packageInfo,
-				files: [],
 				path: path.dirname(packageJsonPath),
 			});
 		}
 	}
 
 	return packages;
-}
-
-async function toImports(path: string) {
-	const content = await getFileContent(path);
-
-	const transpiler = new Bun.Transpiler({
-		loader: "tsx",
-	});
-
-	const result = transpiler.scan(content);
-
-	return {
-		content,
-		path,
-		imports: result.imports,
-	};
-}
-
-async function getFileContent(path: string) {
-	const file = Bun.file(path);
-	return file.text();
 }

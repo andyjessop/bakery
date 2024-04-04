@@ -13,9 +13,11 @@ export interface GitDetails {
 	headSha: string;
 }
 
-export interface PackageInfo {
-	deps: string[];
+export interface PackageInfo extends PackageDetails {
 	files: FileInfo[];
+}
+
+export interface PackageDetails {
 	details: Package;
 	path: string;
 }

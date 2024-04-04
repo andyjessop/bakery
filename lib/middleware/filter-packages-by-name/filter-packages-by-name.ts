@@ -3,7 +3,7 @@ import type { CommandContext } from "../../command/types";
 export async function filterPackagesByName(ctx: CommandContext) {
 	const { get, set } = ctx;
 
-	const packages = get("packages");
+	const packages = get("allPackagesDetails");
 	const flags = get("flags");
 
 	const packagesToInclude = flags.packages
@@ -11,7 +11,7 @@ export async function filterPackagesByName(ctx: CommandContext) {
 		: undefined;
 
 	set(
-		"packages",
+		"filteredPackagesDetails",
 		packages.filter(
 			(pkg) =>
 				!packagesToInclude || packagesToInclude.includes(pkg.details.name),
