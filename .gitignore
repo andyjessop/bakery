@@ -1,3 +1,4 @@
 node_modules
 .nx/cache
 .bin
+.env

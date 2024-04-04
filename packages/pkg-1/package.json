@@ -4,5 +4,8 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"test": "bun run src/test.ts"
-	}
+	},
+  "dependencies": {
+    "react": "^17.0.2"
+  }
 }

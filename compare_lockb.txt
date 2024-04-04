@@ -1,0 +1,29 @@
+Bun is a fast JavaScript runtime, package manager, bundler, and test runner. (1.1.0+5903a6141)
+
+Usage: bun <command> [...flags] [...args]
+
+Commands:
+  run       ./my-script.ts       Execute a file with Bun
+            lint                 Run a package.json script
+  test                           Run unit tests with Bun
+  x         prisma               Execute a package binary (CLI), installing if needed (bunx)
+  repl                           Start a REPL session with Bun
+  exec                           Run a shell script directly with Bun
+
+  install                        Install dependencies for a package.json (bun i)
+  add       elysia               Add a dependency to package.json (bun a)
+  remove    lyra                 Remove a dependency from package.json (bun rm)
+  update    backbone             Update outdated dependencies
+  link      [<package>]          Register or link a local npm package
+  unlink                         Unregister a local npm package
+  pm <subcommand>                Additional package management utilities
+
+  build     ./a.ts ./b.jsx       Bundle TypeScript & JavaScript into a single file
+
+  init                           Start an empty Bun project from a blank template
+  create    @remix-run/dev       Create a new project from a template (bun c)
+  upgrade                        Upgrade to latest version of Bun.
+  <command> --help               Print help text for command.
+
+Learn more about Bun:            https://bun.sh/docs
+Join our Discord community:      https://bun.sh/discord

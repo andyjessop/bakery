@@ -1,28 +1,28 @@
 {
-	"name": "@andyjessop/bakery",
-	"version": "0.0.1",
-	"author": "Andy Jessop",
-	"license": "CC BY-NC 4.0",
-	"type": "module",
-	"bin": {
-		"bakery": "./.bin/bakery"
-	},
-	"files": [".bin/bakery"],
-	"scripts": {
-		"build": "bun build ./scripts/command/command.ts --compile --outfile .bin/bakery",
-		"publish": "npm publish --access=public",
-		"serve": "bun run --cwd ./apps/server serve",
-		"command": "bun run ./scripts/command/command.ts"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.6.2",
-		"@types/bun": "^1.0.10",
-		"nx": "18.1.3"
-	},
-	"workspaces": ["apps/*", "packages/*"],
-	"dependencies": {
-		"@types/minimist": "^1.2.5",
-		"minimist": "^1.2.8",
-		"react": "^18.2.0"
-	}
+  "name": "@andyjessop/bakery",
+  "version": "0.0.1",
+  "author": "Andy Jessop",
+  "license": "CC BY-NC 4.0",
+  "type": "module",
+  "bin": {
+    "bakery": "./.bin/bakery"
+  },
+  "files": [".bin/bakery"],
+  "scripts": {
+    "build": "bun build ./lib/command/command.ts --compile --outfile .bin/bakery",
+    "publish": "npm publish --access=public",
+    "serve": "bun run --cwd ./apps/server serve",
+    "test": "bun test",
+    "command": "bun run ./lib/command/command.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.6.2",
+    "@types/bun": "^1.0.10"
+  },
+  "workspaces": ["apps/*", "packages/*"],
+  "dependencies": {
+    "@types/minimist": "^1.2.5",
+    "minimist": "^1.2.8",
+    "react": "^18.2.0"
+  }
 }

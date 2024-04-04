@@ -6,6 +6,13 @@
 
 Bakery is a monorepo task runner that allows you to efficiently run scripts across multiple packages in your repository. It provides commands to run tasks on all packages or only on affected packages based on changes since a specified commit.
 
+## Roadmap
+
+- [x] Run tasks
+- [ ] Run tasks on affected packages
+- [ ] Cache task output
+- [ ] Remote task cache
+
 ## Installation
 
 ```bash
