@@ -18,7 +18,7 @@ export interface PackageInfo extends PackageDetails {
 }
 
 export interface PackageDetails {
-	details: Package;
+	details: PackageJson;
 	path: string;
 }
 
@@ -34,7 +34,7 @@ export interface Task {
 	scriptName: string;
 }
 
-export interface Package {
+export interface PackageJson {
 	name: string;
 	version?: string;
 	description?: string;

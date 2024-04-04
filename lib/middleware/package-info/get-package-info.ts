@@ -1,22 +1,16 @@
-import type { Import } from "bun";
 import type { PackageDetails, PackageInfo } from "../../types";
 import { readdir } from "node:fs/promises";
-import { dirname, join, relative } from "node:path";
+import { Resolver } from "../../resolver/Resolver";
 
 export async function getPackageInfo(
-	all: PackageDetails[],
+	rootPath: string,
 	filtered: PackageDetails[],
 ): Promise<PackageInfo[]> {
+	const resolver = await Resolver.create(rootPath);
 	const packages = new Map<string, PackageInfo>();
-	const packagesByPath = new Map<string, PackageDetails>(
-		all.map((p) => [p.path, p]),
-	);
-	const packagesByName = new Map<string, PackageDetails>(
-		all.map((p) => [p.details.name, p]),
-	);
 
 	async function processPackage(packageDetails: PackageDetails) {
-		const packagePath = packageDetails.path; // path relative to cwd (root of the project)
+		const packagePath = packageDetails.path;
 
 		if (!packages.has(packagePath)) {
 			packages.set(packagePath, {
@@ -38,14 +32,21 @@ export async function getPackageInfo(
 				packageInfo.files.push(fileInfo);
 
 				for (const importItem of fileInfo.imports) {
-					const importPackagePath = getPackagePathFromImport(
-						importItem,
+					const importPackagePath = resolver.resolveImportPath(
+						importItem.path,
 						filePath,
 					);
 
-					if (importPackagePath && packagesByPath.has(importPackagePath)) {
-						const importPackageDetails = packagesByPath.get(importPackagePath)!;
-						await processPackage(importPackageDetails);
+					console.log(importItem, importPackagePath);
+
+					if (importPackagePath) {
+						const importPackageDetails = resolver.getPackage(importPackagePath);
+						if (importPackageDetails) {
+							await processPackage({
+								details: importPackageDetails,
+								path: importPackagePath,
+							});
+						}
 					}
 				}
 			}
@@ -57,32 +58,6 @@ export async function getPackageInfo(
 	}
 
 	return Array.from(packages.values());
-
-	function getPackagePathFromImport(
-		importItem: Import,
-		importingFilePath: string,
-	): string | undefined {
-		const importedPath = importItem.path;
-		const importingDir = dirname(importingFilePath);
-
-		// Resolve the imported path relative to the importing file
-		const resolvedPath = join(importingDir, importedPath);
-
-		// Find the package that matches the resolved path
-		for (const [packagePath, packageDetails] of packagesByPath.entries()) {
-			const relativePathToPackage = relative(packagePath, resolvedPath);
-
-			// Check if the resolved path is within the package directory
-			if (
-				!relativePathToPackage.startsWith("..") &&
-				!relativePathToPackage.startsWith(".")
-			) {
-				return packagePath;
-			}
-		}
-
-		return undefined;
-	}
 }
 
 async function toImports(path: string) {
